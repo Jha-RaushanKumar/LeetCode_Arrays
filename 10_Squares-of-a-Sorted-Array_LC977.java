@@ -1,26 +1,35 @@
 class Solution {
-    public int fib(int n) {
+	
+    public int[] sortedSquares(int[] nums) {
 
 /*
-        //Approach1 -- TC:O(2^N) SC:O(N)
-        if(n==0 || n==1){
-            return n;
+        //Approach1 -- TC:O(N + NlogN) SC:O(N)
+        for(int i=0;i<nums.length;i++){
+            nums[i] = nums[i]*nums[i];
         }
-        return fib(n-1)+fib(n-2);
+        Arrays.sort(nums);
+        return nums;
 */
-        //Approach2 -- TC:O(N) SC:O(1)
-        if(n==0 || n==1){
-            return n;
-        }
-        int a = 0;
-        int b = 1;
-        while(n>1){
-            int sum = a+b;
-            a=b;
-            b=sum;
-            n--;
-        }
-        return b;
 
+        //Approach2 -- TC:O(N) SC:O(N)
+        int i = 0;
+        int j = nums.length-1;
+        int ans[] = new int[j+1];
+        int k = j;
+        while(i<=j){
+            if(Math.abs(nums[j]) >= Math.abs(nums[i])){
+                int num = nums[j]*nums[j];
+                ans[k] = num;
+                j--;
+                k--;
+            }
+            else{
+                int num = nums[i]*nums[i];
+                ans[k] = num;
+                i++;
+                k--;
+            }
+        }
+        return ans;        
     }
 }
